@@ -1,0 +1,13 @@
+body {
+    background-color: #ffad33
+}
+
+.img-responsive {
+    margin: 0 auto;
+    width: 300px;
+    height: auto;
+}
+
+#new {
+    width: auto;
+}
