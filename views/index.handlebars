@@ -4,7 +4,7 @@
             {{#unless this.devoured}}
                 <div class="undevoured">
                     {{this.id}}. {{this.burger_name}}
-                    <form action="index/update/{{this.id}}?_method=PUT" method="POST">
+                    <form action="index/{{this.id}}?_method=PUT" method="POST">
                         <input type="submit" value="Devour">
                     </form>
                 </div>
@@ -14,7 +14,7 @@
             {{#if this.devoured}}
                 <div class="devoured">
                     {{this.id}}. {{this.burger_name}}
-                    <form action="index/delete/{{this.id}}?_method=DELETE" method="POST">
+                    <form action="index/{{this.id}}?_method=DELETE" method="POST">
                         <input type="submit" value="Throw out?">
                     </form>
                 </div>

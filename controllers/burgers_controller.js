@@ -3,8 +3,15 @@ var burger = require("./../models/burger");
 
 var router = express.Router();
 
+var db = require("../models");
+db.sequelize.sync();
+
 router.get('/', function(req, res) {
-    burger.all(function(data){
+    db.Burger.findAll({
+        order: [
+            ["id", "ASC"]
+        ]
+    }).then(function(data){
         var hbsObject = {
             burger: data
         }
@@ -13,19 +20,31 @@ router.get('/', function(req, res) {
 })
 
 router.post('/', function(req, res) {
-    burger.create(req.body.newBurger, function() {
+    db.Burger.create({
+        burger_name: req.body.newBurger
+    }).then(function() {
         res.redirect('/index');
     })
 })
 
-router.put("/update/:id", function(req, res) {
-    burger.update(req.params.id, function() {
+router.put("/:id", function(req, res) {
+    db.Burger.update({ 
+            devoured: true
+        },
+        { where: {
+            id: req.params.id
+        }
+    }).then(function() {
         res.redirect('/index');
     })
 })
 
-router.delete("/delete/:id", function(req, res) {
-    burger.delete(req.params.id, function(){
+router.delete("/:id", function(req, res) {
+    db.Burger.destroy({
+        where: {
+            id: req.params.id
+        }
+     }).then(function(){
         res.redirect("/index");
     })
 })
